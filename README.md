@@ -11,17 +11,29 @@ This is a simple Objective-C wrapper for librabbitmq-c, a C AMQP library from th
 
 ## Build
 
-There is nothing to build. Just include the source and header files into your X-Code project and link it againt librabbitmq-c.
+There is nothing to build. Just include the source and header files into your Xcode project and link it againt librabbitmq-c.
 
 ## Usage
 
- * Establish a connection the server using AMQPConnection
- * Open a communication channel using AMQPConnection::openChannel
- * Create queues using AMQPQueue or exchanges using AMQPExchange
- * Connect queues to exchanges using AMQPQueue::bindToExchange
- * To receive messages, use an AMQPConsumer bound to a queue (AMQPConsumer::initForQueue...)
- * For ease of use, there is a complete threaded consumer implementation at AMQPConsumerThread using a AMQPConsumerThreadDelegate to handle received messages
- * To publish messages on an exchange, use AMQPExchange::publishMessage
+ * Establish a connection the server using `AMQPConnection`
+ * Open a communication channel using `AMQPConnection - (AMQPChannel*)openChannel`
+ * Create queues using `AMQPQueue` or exchanges using `AMQPExchange`
+ * Connect queues to exchanges using `AMQPQueue`:
+ 
+        - (void)bindToExchange:(AMQPExchange*)theExchange
+                       withKey:(NSString*)bindingKey
+ * To receive messages, use an `AMQPConsumer` bound to a queue:
+ 
+           - (id)initForQueue:(AMQPQueue*)theQueue
+                    onChannel:(AMQPChannel*)theChannel
+          useAcknowledgements:(BOOL)ack
+                  isExclusive:(BOOL)exclusive
+         receiveLocalMessages:(BOOL)local
+ * For ease of use, there is a complete threaded consumer implementation at `AMQPConsumerThread` using a `AMQPConsumerThreadDelegate` to handle received messages
+ * To publish messages on an exchange, use `AMQPExchange`:
+         
+        - (void)publishMessage:(NSString*)body
+               usingRoutingKey:(NSString*)theRoutingKey
 
 ## License
 

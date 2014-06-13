@@ -78,7 +78,7 @@
 		
 		// Frame #1: method frame with method basic.deliver
 		result = amqp_simple_wait_frame(channel.connection.internalConnection, &frame);
-		if(result <= 0) { return nil; }
+		if(result != 0) { return nil; }
 		
 		if(frame.frame_type != AMQP_FRAME_METHOD || frame.payload.method.id != AMQP_BASIC_DELIVER_METHOD) { continue; }
 		
@@ -86,7 +86,7 @@
 		
 		// Frame #2: header frame containing body size
 		result = amqp_simple_wait_frame(channel.connection.internalConnection, &frame);
-		if(result <= 0) { return nil; }
+		if(result != 0) { return nil; }
 		
 		if(frame.frame_type != AMQP_FRAME_HEADER)
 		{
@@ -103,7 +103,7 @@
 		while(receivedBytes < bodySize)
 		{
 			result = amqp_simple_wait_frame(channel.connection.internalConnection, &frame);
-			if(result <= 0) { return nil; }
+			if(result != 0) { return nil; }
 			
 			if(frame.frame_type != AMQP_FRAME_BODY)
 			{

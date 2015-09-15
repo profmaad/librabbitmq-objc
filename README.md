@@ -15,7 +15,7 @@ There is nothing to build. Just include the source and header files into your Xc
 
 ## Usage
 
- * Establish a connection the server using `AMQPConnection`
+ * Establish a connection to the server using `AMQPConnection`
  * Open a communication channel using `AMQPConnection - (AMQPChannel*)openChannel`
  * Create queues using `AMQPQueue` or exchanges using `AMQPExchange`
  * Connect queues to exchanges using `AMQPQueue`:

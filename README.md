@@ -1,3 +1,5 @@
+# Moved to https://codeberg.org/profmaad/librabbitmq-objc
+
 # librabbitmq-objc: Objective-C wrapper for librabbitmq-c
 
 ## Description
